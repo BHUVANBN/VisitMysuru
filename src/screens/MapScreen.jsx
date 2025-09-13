@@ -73,25 +73,25 @@ const MapScreen = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <div className="bg-white shadow-lg">
-        <div className="max-w-4xl mx-auto px-4 py-4 flex items-center">
-          <Link to="/" className="text-orange-600 hover:text-orange-700 mr-4">
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </svg>
-          </Link>
-          <h1 className="text-2xl font-bold text-gray-800">Interactive Map</h1>
+    <div className="bg-gray-50">
+      {/* Page Header */}
+      <div className="bg-white shadow-sm border-b border-gray-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+          <div className="text-center">
+            <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">Interactive Map</h1>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              Explore Mysuru's landmarks and attractions. Click on any pin to learn more about the location and discover its stories.
+            </p>
+          </div>
         </div>
       </div>
 
       {/* Map Container */}
-      <div className="max-w-4xl mx-auto px-4 py-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
           <div className="relative">
             {/* Map Background */}
-            <div className="relative h-96 bg-gradient-to-br from-green-100 to-green-200">
+            <div className="relative h-96 md:h-[500px] lg:h-[600px] bg-gradient-to-br from-green-100 to-green-200">
               <img
                 src="https://images.unsplash.com/photo-1584464491033-06628f3a6b7b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
                 alt="Mysuru Map"
