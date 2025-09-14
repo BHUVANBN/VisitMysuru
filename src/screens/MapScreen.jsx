@@ -125,11 +125,31 @@ const MapScreen = () => {
                       closeButton={true}
                       autoClose={false}
                       className="custom-popup"
+                      maxWidth={300}
+                      minWidth={250}
                     >
-                      <div className="text-center p-2">
-                        <span className="text-2xl mb-2 block">{landmark.icon}</span>
-                        <h3 className="font-semibold text-lg">{landmark.name}</h3>
-                        <p className="text-sm text-gray-600 mt-1">Click marker for details</p>
+                      <div className="p-3">
+                        <div className="flex items-center mb-3">
+                          <span className="text-2xl mr-2">{landmark.icon}</span>
+                          <h3 className="font-semibold text-lg text-gray-800">{landmark.name}</h3>
+                        </div>
+                        <p className="text-gray-600 text-sm leading-relaxed mb-3">{landmark.story}</p>
+                        <div className="grid grid-cols-2 gap-1 mb-3">
+                          {landmark.photos.map((photo, index) => (
+                            <img
+                              key={index}
+                              src={photo}
+                              alt={`${landmark.name} ${index + 1}`}
+                              className="w-full h-16 object-cover rounded"
+                            />
+                          ))}
+                        </div>
+                        <button
+                          onClick={() => handleLandmarkClick(landmark)}
+                          className="w-full bg-orange-600 hover:bg-orange-700 text-white py-1.5 rounded text-xs font-semibold transition-colors"
+                        >
+                          📸 Add My Photo/Story
+                        </button>
                       </div>
                     </Popup>
                   </Marker>
