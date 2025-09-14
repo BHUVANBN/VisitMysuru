@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
+import '../components/MapStyles.css'
 import L from 'leaflet'
 
 // Fix for default markers in react-leaflet
@@ -104,8 +105,9 @@ const MapScreen = () => {
               <MapContainer
                 center={[12.2958, 76.6394]}
                 zoom={12}
-                style={{ height: '500px', width: '100%' }}
+                style={{ height: '500px', width: '100%', zIndex: 1 }}
                 className="rounded-2xl"
+                zoomControl={true}
               >
                 <TileLayer
                   url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -119,8 +121,12 @@ const MapScreen = () => {
                       click: () => handleLandmarkClick(landmark),
                     }}
                   >
-                    <Popup>
-                      <div className="text-center">
+                    <Popup
+                      closeButton={true}
+                      autoClose={false}
+                      className="custom-popup"
+                    >
+                      <div className="text-center p-2">
                         <span className="text-2xl mb-2 block">{landmark.icon}</span>
                         <h3 className="font-semibold text-lg">{landmark.name}</h3>
                         <p className="text-sm text-gray-600 mt-1">Click marker for details</p>
@@ -134,7 +140,7 @@ const MapScreen = () => {
 
           {/* Info Panel */}
           <div className="lg:w-1/3">
-            <div className="bg-white rounded-2xl shadow-xl p-6">
+            <div className="bg-white rounded-2xl shadow-xl p-6 relative z-10">
               {selectedLandmark ? (
                 <div>
                   <div className="flex items-center mb-4">
@@ -192,7 +198,7 @@ const MapScreen = () => {
 
       {/* Landmark Modal */}
       {selectedLandmark && !showContributeForm && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-[9999]">
           <div className="bg-white rounded-2xl max-w-md w-full max-h-[80vh] overflow-y-auto">
             <div className="p-6">
               <div className="flex items-center justify-between mb-4">
