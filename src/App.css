@@ -12,9 +12,11 @@ html {
 }
 
 body {
-  margin: 0;
-  padding: 0;
-  background-color: #fafafa;
+
+min-height: 100vh;
+  background: linear-gradient(135deg, #daa139 0%, #85b1de 100%);
+  /* #ffe5b4 is a light orange, #a7c7e7 is a light blue */
+  font-family: 'Inter', sans-serif;
 }
 
 /* Custom scrollbar for webkit browsers */
