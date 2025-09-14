@@ -1,6 +1,15 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
-import ScreenshotFrom20250914224141 from '../assets/Screenshot From 2025-09-14 22-41-41.png'
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
+import 'leaflet/dist/leaflet.css'
+import L from 'leaflet'
+
+// Fix for default markers in react-leaflet
+delete L.Icon.Default.prototype._getIconUrl
+L.Icon.Default.mergeOptions({
+  iconRetinaUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png',
+  iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
+  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
+})
 const MapScreen = () => {
   const [selectedLandmark, setSelectedLandmark] = useState(null)
   const [showContributeForm, setShowContributeForm] = useState(false)
@@ -9,7 +18,7 @@ const MapScreen = () => {
     {
       id: 1,
       name: "Mysuru Palace",
-      position: { top: '45%', left: '50%' },
+      coords: [12.3052, 76.6552],
       story: "The magnificent Mysuru Palace, also known as Amba Vilas Palace, is a historical palace and a royal residence. It served as the official residence of the Wadiyar dynasty and the seat of the Kingdom of Mysore.",
       photos: [
         "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
@@ -20,7 +29,7 @@ const MapScreen = () => {
     {
       id: 2,
       name: "Chamundi Hills",
-      position: { top: '25%', left: '70%' },
+      coords: [12.2726, 76.6717],
       story: "Chamundi Hills, located at a height of 1,065 meters, is one of the most sacred places in Mysuru. The hill is crowned by the Sri Chamundeshwari Temple, dedicated to Goddess Chamundi.",
       photos: [
         "https://images.unsplash.com/photo-1544735716-392fe2489ffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
@@ -30,7 +39,7 @@ const MapScreen = () => {
     {
       id: 3,
       name: "Mysuru Zoo",
-      position: { top: '60%', left: '40%' },
+      coords: [12.3014, 76.6459],
       story: "Established in 1892, the Mysuru Zoo is one of the oldest and most popular zoos in India. It houses a wide variety of species and is known for its conservation efforts.",
       photos: [
         "https://images.unsplash.com/photo-1564349683136-77e08dba1ef7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
@@ -40,7 +49,7 @@ const MapScreen = () => {
     {
       id: 4,
       name: "Brindavan Gardens",
-      position: { top: '80%', left: '30%' },
+      coords: [12.4244, 76.5750],
       story: "The beautiful Brindavan Gardens are located below the Krishna Raja Sagara dam. Famous for its symmetric design and musical fountain, it attracts thousands of visitors daily.",
       photos: [
         "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
@@ -50,7 +59,7 @@ const MapScreen = () => {
     {
       id: 5,
       name: "St. Philomena's Cathedral",
-      position: { top: '35%', left: '45%' },
+      coords: [12.3098, 76.6613],
       story: "This Neo-Gothic cathedral is one of the largest churches in India. Built in 1956, it's inspired by the Cologne Cathedral in Germany and houses relics of St. Philomena.",
       photos: [
         "https://images.unsplash.com/photo-1520637836862-4d197d17c55a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
@@ -88,42 +97,87 @@ const MapScreen = () => {
 
       {/* Map Container */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
-          <div className="relative">
-            {/* Map Background */}
-            <div className="relative h-96 md:h-[500px] lg:h-[600px] bg-gradient-to-br from-green-100 to-green-200">
-              <iframe
-                width="100%"
-                height="500"
-                frameborder="0"
-                src="https://www.openstreetmap.org/export/embed.html?bbox=76.6,12.2,76.8,12.4&layer=mapnik&marker=12.2958,76.6394">
-              </iframe>
-
-
-              {/* Landmark Pins */}
-              {landmarks.map((landmark) => (
-                <button
-                  key={landmark.id}
-                  onClick={() => handleLandmarkClick(landmark)}
-                  className="absolute transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-full p-2 shadow-lg hover:shadow-xl transition-shadow border-2 border-orange-500 hover:scale-110 transition-transform"
-                  style={{ top: landmark.position.top, left: landmark.position.left }}
-                >
-                  <span className="text-2xl">{landmark.icon}</span>
-                </button>
-              ))}
-            </div>
-
-            {/* Map Legend */}
-            <div className="absolute bottom-4 left-4 bg-white rounded-lg p-3 shadow-lg">
-              <h3 className="font-semibold text-sm mb-2">Landmarks</h3>
-              <div className="space-y-1">
+        <div className="flex flex-col lg:flex-row gap-6">
+          {/* Interactive Map */}
+          <div className="lg:w-2/3">
+            <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
+              <MapContainer
+                center={[12.2958, 76.6394]}
+                zoom={12}
+                style={{ height: '500px', width: '100%' }}
+                className="rounded-2xl"
+              >
+                <TileLayer
+                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                  attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                />
                 {landmarks.map((landmark) => (
-                  <div key={landmark.id} className="flex items-center text-xs">
-                    <span className="mr-2">{landmark.icon}</span>
-                    <span>{landmark.name}</span>
-                  </div>
+                  <Marker
+                    key={landmark.id}
+                    position={landmark.coords}
+                    eventHandlers={{
+                      click: () => handleLandmarkClick(landmark),
+                    }}
+                  >
+                    <Popup>
+                      <div className="text-center">
+                        <span className="text-2xl mb-2 block">{landmark.icon}</span>
+                        <h3 className="font-semibold text-lg">{landmark.name}</h3>
+                        <p className="text-sm text-gray-600 mt-1">Click marker for details</p>
+                      </div>
+                    </Popup>
+                  </Marker>
                 ))}
-              </div>
+              </MapContainer>
+            </div>
+          </div>
+
+          {/* Info Panel */}
+          <div className="lg:w-1/3">
+            <div className="bg-white rounded-2xl shadow-xl p-6">
+              {selectedLandmark ? (
+                <div>
+                  <div className="flex items-center mb-4">
+                    <span className="text-3xl mr-3">{selectedLandmark.icon}</span>
+                    <h2 className="text-xl font-bold text-gray-800">{selectedLandmark.name}</h2>
+                  </div>
+                  <p className="text-gray-600 leading-relaxed mb-4">{selectedLandmark.story}</p>
+                  <div className="grid grid-cols-2 gap-2 mb-4">
+                    {selectedLandmark.photos.map((photo, index) => (
+                      <img
+                        key={index}
+                        src={photo}
+                        alt={`${selectedLandmark.name} ${index + 1}`}
+                        className="w-full h-20 object-cover rounded-lg"
+                      />
+                    ))}
+                  </div>
+                  <button
+                    onClick={handleContribute}
+                    className="w-full bg-orange-600 hover:bg-orange-700 text-white py-2 rounded-lg font-semibold transition-colors text-sm"
+                  >
+                    📸 Add My Photo/Story
+                  </button>
+                </div>
+              ) : (
+                <div className="text-center text-gray-500">
+                  <div className="text-4xl mb-4">🗺️</div>
+                  <p className="mb-4">Click on any marker to explore Mysuru's landmarks and learn their stories!</p>
+                  
+                  {/* Map Legend */}
+                  <div className="bg-gray-50 rounded-lg p-4">
+                    <h3 className="font-semibold text-sm mb-3 text-gray-800">Available Landmarks</h3>
+                    <div className="space-y-2">
+                      {landmarks.map((landmark) => (
+                        <div key={landmark.id} className="flex items-center text-xs text-gray-600">
+                          <span className="mr-2 text-lg">{landmark.icon}</span>
+                          <span>{landmark.name}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -131,7 +185,7 @@ const MapScreen = () => {
         {/* Instructions */}
         <div className="mt-6 bg-orange-50 rounded-lg p-4">
           <p className="text-orange-800 text-center">
-            <span className="font-semibold">💡 Tip:</span> Click on any landmark pin to learn more about it and see photos!
+            <span className="font-semibold">💡 Tip:</span> Click on any marker on the map to learn more about it and see photos!
           </p>
         </div>
       </div>
