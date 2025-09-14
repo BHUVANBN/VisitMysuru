@@ -92,13 +92,14 @@ const MapScreen = () => {
           <div className="relative">
             {/* Map Background */}
             <div className="relative h-96 md:h-[500px] lg:h-[600px] bg-gradient-to-br from-green-100 to-green-200">
-              <img
-                src={ScreenshotFrom20250914224141}
+              <iframe
+                width="100%"
+                height="500"
+                frameborder="0"
+                src="https://www.openstreetmap.org/export/embed.html?bbox=76.6,12.2,76.8,12.4&layer=mapnik&marker=12.2958,76.6394">
+              </iframe>
 
-                alt="Mysuru Map"
-                className="w-full h-full object-cover opacity-70"
-              />
-              
+
               {/* Landmark Pins */}
               {landmarks.map((landmark) => (
                 <button
