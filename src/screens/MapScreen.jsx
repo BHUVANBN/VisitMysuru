@@ -73,7 +73,7 @@ const MapScreen = () => {
   }
 
   return (
-    <div className="bg-gray-50">
+    <div className="bg-gray-50 pt-20">
       {/* Page Header */}
       <div className="bg-white shadow-sm border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
@@ -93,7 +93,7 @@ const MapScreen = () => {
             {/* Map Background */}
             <div className="relative h-96 md:h-[500px] lg:h-[600px] bg-gradient-to-br from-green-100 to-green-200">
               <img
-                src="https://images.unsplash.com/photo-1584464491033-06628f3a6b7b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
+                src=" src/assets/gettyimages-1461672520-1024x1024.jpg"
                 alt="Mysuru Map"
                 className="w-full h-full object-cover opacity-70"
               />

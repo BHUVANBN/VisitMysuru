@@ -43,7 +43,7 @@ const HomeScreen = () => {
   ], [])
 
   return (
-    <main className="bg-gradient-to-br from-orange-50 to-amber-50" role="main" aria-label="Mysuru tourism homepage">
+    <main className="bg-gradient-to-br from-orange-50 to-amber-50 pt-24" role="main" aria-label="Mysuru tourism homepage">
       {/* Hero Section */}
       <section className="relative" aria-labelledby="hero-title">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
