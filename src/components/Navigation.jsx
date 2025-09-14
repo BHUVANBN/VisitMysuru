@@ -62,10 +62,10 @@ const Navigation = () => {
             {/* Logo Section - Left */}
             <Link to="/" className="flex items-center flex-shrink-0 group">
               <div className="flex flex-col">
-                <div className="text-2xl font-bold text-gray-900 tracking-tight group-hover:text-orange-600 transition-colors duration-300">
+                <div className="text-3xl font-bold text-gray-900 tracking-tight group-hover:text-orange-600 transition-colors duration-300">
                   Namma Mysuru
                 </div>
-                <div className="text-xs text-gray-500 font-medium tracking-wide uppercase">
+                <div className="text-sm text-gray-500 font-medium tracking-wide uppercase">
                   Official Tourism Guide
                 </div>
               </div>
@@ -78,7 +78,7 @@ const Navigation = () => {
                   <Link
                     key={item.path}
                     to={item.path}
-                    className={`relative text-sm font-medium px-3 py-2 rounded-lg transition-all duration-300 whitespace-nowrap group ${
+                    className={`relative text-base font-medium px-3 py-2 rounded-lg transition-all duration-300 whitespace-nowrap group ${
                       isActive(item.path)
                         ? 'text-orange-700 bg-white/40'
                         : 'text-gray-800 hover:text-orange-700 hover:bg-white/30'
@@ -106,12 +106,12 @@ const Navigation = () => {
                 <input
                   type="text"
                   placeholder="Search..."
-                  className="block w-48 pl-9 pr-3 py-2.5 border border-white/40 bg-white/50 backdrop-blur-sm rounded-full text-sm placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-white/60 focus:bg-white/70 transition-all duration-500"
+                  className="block w-48 pl-9 pr-3 py-2.5 border border-white/40 bg-white/50 backdrop-blur-sm rounded-full text-base placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-white/60 focus:bg-white/70 transition-all duration-500"
                 />
               </div>
               <Link
                 to="/contribute"
-                className="px-6 py-2.5 bg-orange-600 hover:bg-orange-700 text-white rounded-full text-sm font-medium transition-all duration-500 shadow-sm hover:shadow-lg whitespace-nowrap transform hover:scale-105 border border-white/20"
+                className="px-6 py-2.5 bg-orange-600 hover:bg-orange-700 text-white rounded-full text-base font-medium transition-all duration-500 shadow-sm hover:shadow-lg whitespace-nowrap transform hover:scale-105 border border-white/20"
               >
                 Share your story
               </Link>
@@ -124,7 +124,7 @@ const Navigation = () => {
                   <Link
                     key={item.path}
                     to={item.path}
-                    className={`relative text-sm font-medium px-2 py-2 rounded-lg transition-all duration-300 whitespace-nowrap ${
+                    className={`relative text-base font-medium px-2 py-2 rounded-lg transition-all duration-300 whitespace-nowrap ${
                       isActive(item.path)
                         ? 'text-orange-700 bg-white/40'
                         : 'text-gray-800 hover:text-orange-700 hover:bg-white/30'
@@ -139,7 +139,7 @@ const Navigation = () => {
                 
                 {/* More Dropdown */}
                 <div className="relative group">
-                  <button className={`text-sm font-medium py-2 px-2 flex items-center rounded-lg transition-all duration-300 ${
+                  <button className={`text-base font-medium py-2 px-2 flex items-center rounded-lg transition-all duration-300 ${
                     scrolled
                       ? 'text-gray-800 hover:text-orange-700 hover:bg-white/40'
                       : 'text-gray-800 hover:text-orange-700 hover:bg-white/30'
@@ -159,7 +159,7 @@ const Navigation = () => {
                         <Link
                           key={item.path}
                           to={item.path}
-                          className={`block px-4 py-3 text-sm transition-all duration-200 rounded-lg mx-2 ${
+                          className={`block px-4 py-3 text-base transition-all duration-200 rounded-lg mx-2 ${
                             isActive(item.path)
                               ? 'text-orange-700 bg-white/60'
                               : 'text-gray-800 hover:text-orange-700 hover:bg-white/50'
@@ -185,7 +185,7 @@ const Navigation = () => {
               </button>
               <Link
                 to="/contribute"
-                className="px-4 py-2 bg-orange-600 hover:bg-orange-700 text-white rounded-full text-sm font-medium transition-all duration-500 shadow-sm hover:shadow-md transform hover:scale-105 border border-white/20"
+                className="px-4 py-2 bg-orange-600 hover:bg-orange-700 text-white rounded-full text-base font-medium transition-all duration-500 shadow-sm hover:shadow-md transform hover:scale-105 border border-white/20"
               >
                 Share
               </Link>
@@ -231,7 +231,7 @@ const Navigation = () => {
                     <input
                       type="text"
                       placeholder="Search..."
-                      className={`block w-full pl-9 pr-3 py-3 border rounded-lg text-sm placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-white/60 transition-all duration-300 ${
+                      className={`block w-full pl-9 pr-3 py-3 border rounded-lg text-base placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-white/60 transition-all duration-300 ${
                         scrolled
                           ? 'border-white/40 bg-white/60 backdrop-blur-sm'
                           : 'border-white/40 bg-white/50 backdrop-blur-sm'
@@ -246,7 +246,7 @@ const Navigation = () => {
                     key={item.path}
                     to={item.path}
                     onClick={() => setIsMenuOpen(false)}
-                    className={`block px-3 py-3 text-base font-medium transition-all duration-300 rounded-lg ${
+                    className={`block px-3 py-3 text-lg font-medium transition-all duration-300 rounded-lg ${
                       isActive(item.path)
                         ? 'text-orange-700 bg-white/60'
                         : 'text-gray-800 hover:text-orange-700 hover:bg-white/50'
