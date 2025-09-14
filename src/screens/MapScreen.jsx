@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-
+import ScreenshotFrom20250914224141 from '../assets/Screenshot From 2025-09-14 22-41-41.png'
 const MapScreen = () => {
   const [selectedLandmark, setSelectedLandmark] = useState(null)
   const [showContributeForm, setShowContributeForm] = useState(false)
@@ -93,7 +93,8 @@ const MapScreen = () => {
             {/* Map Background */}
             <div className="relative h-96 md:h-[500px] lg:h-[600px] bg-gradient-to-br from-green-100 to-green-200">
               <img
-                src=" src/assets/gettyimages-1461672520-1024x1024.jpg"
+                src={ScreenshotFrom20250914224141}
+
                 alt="Mysuru Map"
                 className="w-full h-full object-cover opacity-70"
               />
